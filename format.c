@@ -106,6 +106,12 @@ int _vprintf(const char *format, va_list args)
 						}
 					}
 					break;
+				case ' ':
+					break;
+				case '+':
+					break;
+				case '#':
+					break;
 				default:
 					_putchar('%');
 					_putchar(*format);
