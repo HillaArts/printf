@@ -106,7 +106,6 @@ int _vprintf(const char *format, va_list args)
 						}
 					}
 					break;
-
 				default:
 					_putchar('%');
 					_putchar(*format);
