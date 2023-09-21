@@ -1,7 +1,9 @@
 #include "main.h"
 
 /**
- * _vprint - custo vprint function
+ * _vprint - custom vprint function that takes a format string and a variable
+ * arguement list and print formatted output.
+ *
  * @format: format string
  * @args: variable argument list
  *
@@ -70,6 +72,7 @@ int _vprintf(const char *format, va_list args)
 						else
 						{
 							int i;
+
 							for (i = 0; str[i] != '\0'; i++)
 							{
 								if (str[i] < 32 || str[i] >= 127)
@@ -84,6 +87,22 @@ int _vprintf(const char *format, va_list args)
 									printed_chars += _putchar(str[i]);
 								}
 							}
+						}
+					}
+					break;
+				case 'p':
+					{
+						void *ptr = va_arg(args, void *);
+
+						if (ptr == NULL)
+						{
+							printed_chars += _print_string("(nil)");
+						}
+						else
+						{
+							printed_chars += _putchar('0');
+							printed_chars += _putchar('x');
+							printed_chars += _print_hexadecimal((uintptr_t)ptr, 1);
 						}
 					}
 					break;

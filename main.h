@@ -6,6 +6,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <limits.h>
+#include <stdint.h>
 
 int _printf(const char *format, ...);
 int _vprintf(const char *format, va_list args);
