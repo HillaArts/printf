@@ -118,57 +118,53 @@ int _vprintf(const char *format, va_list args)
 					printed_chars += 2;
 					break;
 				case 'h':
-{
-    char specifier = *(format + 1);
-    format++;
+					{
+						char specifier = *(format + 1);
+						format++;
 
-    switch (specifier)
-    {
-        case 'd':
-        case 'i':
-            printed_chars += _print_short(va_arg(args, int));
-            break;
+						switch (specifier)
 
-        case 'u':
-        case 'o':
-        case 'x':
-        case 'X':
-            printed_chars += _print_short_unsigned(va_arg(args, unsigned int));
-            break;
-
-        default:
-            format--; 
-            break;
-    }
-}
-break;
-
+						{
+							case 'd':
+							case 'i':
+								printed_chars += _print_short(va_arg(args, int));
+								break;
+							case 'u':
+							case 'o':
+							case 'x':
+							case 'X':
+								printed_chars += _print_short_unsigned(va_arg(args, unsigned int));
+								break;
+							default:
+								format--;
+								break;
+						}
+					}
+					break;
 				case 'l':
-{
-    char specifier = *(format + 1);
-    format++;
+					{
+						char specifier = *(format + 1);
+						format++;
 
-    switch (specifier)
-    {
-        case 'd':
-        case 'i':
-            printed_chars += _print_long(va_arg(args, long));
-            break;
+						switch (specifier)
 
-        case 'u':
-        case 'o':
-        case 'x':
-        case 'X':
-            printed_chars += _print_long_unsigned(va_arg(args, unsigned long));
-            break;
-
-        default:
-            format--;
-            break;
-    }
-}
-break;
-
+						{
+							case 'd':
+							case 'i':
+								printed_chars += _print_long(va_arg(args, long));
+								break;
+							case 'u':
+							case 'o':
+							case 'x':
+							case 'X':
+								printed_chars += _print_long_unsigned(va_arg(args, unsigned long));
+								break;
+							default:
+								format--;
+								break;
+						}
+					}
+					break;
 			}
 		}
 		format++;

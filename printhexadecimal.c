@@ -12,33 +12,33 @@ static const char lowercase_hex_digits[] = "0123456789abcdef";
  */
 int _print_hexadecimal(unsigned int n, int uppercase)
 {
-        int printed_chars = 0;
-        const char *hex_digits = (uppercase) ?
-                uppercase_hex_digits : lowercase_hex_digits;
-        char hex_buffer[100];
-        int i = 0;
+	int printed_chars = 0;
+	const char *hex_digits = (uppercase) ?
+	uppercase_hex_digits : lowercase_hex_digits;
+	char hex_buffer[100];
+	int i = 0;
 
-        if (n == 0)
-        {
-        _putchar('0');
-        printed_chars++;
-        }
-        else
-        {
-        while (n > 0)
-        {
-        hex_buffer[i] = hex_digits[n % 16];
-        n /= 16;
-        i++;
-        }
+	if (n == 0)
+	{
+	_putchar('0');
+	printed_chars++;
+	}
+	else
+	{
+	while (n > 0)
+	{
+	hex_buffer[i] = hex_digits[n % 16];
+	n /= 16;
+	i++;
+	}
 
-        for (i--; i >= 0; i--)
-        {
-        _putchar(hex_buffer[i]);
-        printed_chars++;
-        }
-        }
+	for (i--; i >= 0; i--)
+	{
+	_putchar(hex_buffer[i]);
+	printed_chars++;
+	}
+	}
 
-        return (printed_chars);
+	return (printed_chars);
 }
 
