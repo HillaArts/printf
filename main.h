@@ -19,6 +19,9 @@ int _print_hexadecimal(unsigned int n, int uppercase);
 int _print_octal(unsigned int n);
 int _print_char(int c);
 int _putchar(char c);
+int _print_short(short n);
+int _print_short_unsigned(unsigned short n);
+int _print_long(long n);
+int _print_long_unsigned(unsigned long n);
 
 #endif /* MAIN_H */
-
