@@ -1,24 +1,27 @@
 #include "main.h"
 
+/**
+ * _handle_plus_flag - Handle the '+' flag for printf-style formatting
+ * @specifier: The conversion specifier (e.g., 'd' or 'i')
+ * @args: The va_list containing the argument to format
+ *
+ * Return: The number of characters printed.
+ */
 int _handle_plus_flag(char specifier, va_list args)
 {
-    int printed_chars = 0;
-    int num = va_arg(args, int);
+	int n = va_arg(args, int);
+	int printed_chars = 0;
 
-    if (num >= 0)
-    {
-        printed_chars += _putchar('+');
-    }
-    switch (specifier)
-    {
-        case 'd':
-        case 'i':
-            printed_chars += _print_int(num);
-            break;
-        default:
-            break;
-    }
+	if (specifier == 'd' || specifier == 'i')
+	{
+	if (n >= 0)
+	{
+	_putchar('+');
+	printed_chars++;
+	}
+	printed_chars += _print_int(n);
+	}
 
-    return printed_chars;
+	return (printed_chars);
 }
 
