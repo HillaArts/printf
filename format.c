@@ -13,6 +13,10 @@
 int _vprintf(const char *format, va_list args)
 {
 	int printed_chars = 0;
+	char specifier = *format;
+	int plus_flag = 0;
+	int space_flag = 0;
+	int hash_flag = 0;
 
 	if (format == NULL)
 		return (-1);
@@ -29,6 +33,18 @@ int _vprintf(const char *format, va_list args)
 			format++;
 			if (*format == '\0')
 				break;
+
+			while (*format == '+' || *format == ' ' || *format == '#')
+			{
+				if (*format == '+')
+					plus_flag = 1;
+				else if (*format == ' ')
+					space_flag = 1;
+				else if (*format == '#')
+					hash_flag = 1;
+				format++;
+			}
+
 			switch (*format)
 			{
 				case 'c':
@@ -107,68 +123,31 @@ int _vprintf(const char *format, va_list args)
 					}
 					break;
 				case ' ':
-					{
-						char specifier = *format;
-						int num = va_arg(args, int);
-						format++;
-
-						switch (specifier)
-						{
-							case 'd':
-							case 'i':
-								{
-									if (num >= 0)
-									{
-										printed_chars += _putchar(' ');
-									}
-									printed_chars += _print_int(num);
-								}
-								break;
-							default:
-								format--;
-								break;
-						}
-					}
-					break;
 				case '+':
-					{
-						char specifier = *format;
-						int num = va_arg(args, int);
-						format++;
-
-						switch (specifier)
-						{
-							case 'd':
-							case 'i':
-								if (num >= 0)
-								{
-									printed_chars += _putchar('+');
-								}
-								printed_chars += _print_int(num);
-								break;
-							default:
-								format--;
-								break;
-						}
-					}
-					break;
 				case '#':
 					{
-						char specifier = *format;
-						format++;
-
 						switch (specifier)
 						{
+							case 'd':
+							case 'i':
+								if (plus_flag)
+									printed_chars += _handle_plus_flag(specifier, args);
+								else if (space_flag)
+									printed_chars += _handle_space_flag(specifier, args);
+								else
+									printed_chars += _print_int(va_arg(args, int));
+								break;
 							case 'x':
 							case 'X':
-								printed_chars += _putchar('0');
-								printed_chars += _putchar(specifier);
-								break;
-							case 'o':
-								printed_chars += _putchar('0');
-								break;
-							default:
-								format--;
+								if (hash_flag)
+								{
+									_putchar('0');
+									_putchar(specifier);
+									printed_chars += 2;
+									printed_chars += _print_hexadecimal(va_arg(args, unsigned int), (specifier == 'X'));
+								}
+								else
+									printed_chars += _print_hexadecimal(va_arg(args, unsigned int), (specifier == 'X'));
 								break;
 						}
 					}
@@ -223,6 +202,7 @@ int _vprintf(const char *format, va_list args)
 					break;
 				default:
 					_putchar('%');
+					_putchar(specifier);
 					_putchar(*format);
 					printed_chars += 2;
 					break;
