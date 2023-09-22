@@ -107,15 +107,71 @@ int _vprintf(const char *format, va_list args)
 					}
 					break;
 				case ' ':
+					{
+						char specifier = *format;
+						int num = va_arg(args, int);
+						format++;
+
+						switch (specifier)
+						{
+							case 'd':
+							case 'i':
+								{
+									if (num >= 0)
+									{
+										printed_chars += _putchar(' ');
+									}
+									printed_chars += _print_int(num);
+								}
+								break;
+							default:
+								format--;
+								break;
+						}
+					}
 					break;
 				case '+':
+					{
+						char specifier = *format;
+						int num = va_arg(args, int);
+						format++;
+
+						switch (specifier)
+						{
+							case 'd':
+							case 'i':
+								if (num >= 0)
+								{
+									printed_chars += _putchar('+');
+								}
+								printed_chars += _print_int(num);
+								break;
+							default:
+								format--;
+								break;
+						}
+					}
 					break;
 				case '#':
-					break;
-				default:
-					_putchar('%');
-					_putchar(*format);
-					printed_chars += 2;
+					{
+						char specifier = *format;
+						format++;
+
+						switch (specifier)
+						{
+							case 'x':
+							case 'X':
+								printed_chars += _putchar('0');
+								printed_chars += _putchar(specifier);
+								break;
+							case 'o':
+								printed_chars += _putchar('0');
+								break;
+							default:
+								format--;
+								break;
+						}
+					}
 					break;
 				case 'h':
 					{
@@ -164,6 +220,11 @@ int _vprintf(const char *format, va_list args)
 								break;
 						}
 					}
+					break;
+				default:
+					_putchar('%');
+					_putchar(*format);
+					printed_chars += 2;
 					break;
 			}
 		}
