@@ -23,5 +23,8 @@ int _print_short(short n);
 int _print_short_unsigned(unsigned short n);
 int _print_long(long n);
 int _print_long_unsigned(unsigned long n);
+int _handle_plus_flag(char specifier, va_list args);
+int _handle_space_flag(char specifier, va_list args);
+int _handle_hash_flag(char specifier, va_list args);
 
 #endif /* MAIN_H */
