@@ -26,5 +26,8 @@ int _print_long_unsigned(unsigned long n);
 int _handle_plus_flag(char specifier, va_list args);
 int _handle_space_flag(char specifier, va_list args);
 int _handle_hash_flag(char specifier, va_list args);
+int _print_int_with_width(int n, int width);
+int _print_string_with_width(char *s, int width);
+int _strlen(char *s);
 
 #endif /* MAIN_H */
